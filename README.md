@@ -8,6 +8,6 @@ link : https://www.figma.com/file/KaTcyyxCmQVfE37DbQmYeA/%EC%87%BC%EB%AF%B8?node
 
 메인, 로그인, 회원가입 페이지로 구성
 
-
+<br>
 <p align="center"><img src="./img/main_page.png" width="50%" margin="0 auto"></p>
 <!-- ![main_page](./img/main_page.png){: width="50%"} -->
