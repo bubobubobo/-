@@ -1,2 +1,2 @@
-# -
-Show me what you got.
+# Show me what you got
+
