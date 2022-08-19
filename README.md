@@ -22,6 +22,7 @@ link : https://www.figma.com/file/KaTcyyxCmQVfE37DbQmYeA/%EC%87%BC%EB%AF%B8?node
 4. 물음표 버튼을 클릭하면 예시답안이 토글된다.
 
 ### 로그인 페이지
-
+로그인
 
 ### 회원가입 페이지
+회원가입
