@@ -1,2 +1,3 @@
-# Show me what you got
+# 쇼미
 
+Show me what you got.
