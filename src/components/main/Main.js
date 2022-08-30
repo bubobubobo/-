@@ -1,7 +1,7 @@
 import Answer from "./Answer";
 import HitMe from "./HitMe";
 import Question from "./Question";
-import StopWatch from "./StopWatch/StopWatch";
+import StopWatch from "./StopWatch";
 
 const Main = () => {
   return (
