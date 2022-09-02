@@ -1,11 +1,13 @@
-import Answer from "./Answer";
+import Header from "./Header";
 import HitMe from "./HitMe";
-import Question from "./Question";
 import StopWatch from "./StopWatch";
+import Question from "./Question";
+import Answer from "./Answer";
 
 const Main = () => {
   return (
     <div>
+      <Header />
       <HitMe />
       <StopWatch />
       <Question />
