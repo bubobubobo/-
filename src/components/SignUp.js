@@ -1,52 +1,52 @@
-import React from "react";
+// react
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
+  // local state
+  const [signUpState, setSignUpState] = useState({
+    email: "",
+    nickname: "",
+    password: "",
+    confirm: "",
+  });
+
+  // signup info array
+  const states = Object.keys(signUpState);
+
+  // helper
+  const handleSignUpState = (target, value) => {
+    setSignUpState({ ...signUpState, [target]: value });
+  };
+
+  const handleSignUp = () => {};
+
+  // SignUp template
   return (
-    <form>
+    <form onSubmit={handleSignUp}>
       <Link to={"/"}>SHOW ME</Link>
+
       <h1>SIGN UP</h1>
-      {/* input container */}
-      <div>
-        <label htmlFor="input_email">input email</label>
-        <input id="input_email" type="email" placeholder="email" required />
-        {/* TODO: bar icon */}
-        {/* TODO: show error msg */}
-      </div>
-      <div>
-        <label htmlFor="input_nickname">input nickname</label>
-        <input
-          id="input_nickname"
-          type="text"
-          placeholder="nickname"
-          required
-        />
-        {/* TODO: bar icon */}
-        {/* TODO: show error msg */}
-      </div>
-      <div>
-        <label htmlFor="input_password">input password</label>
-        <input
-          id="input_password"
-          type="text"
-          placeholder="password"
-          required
-        />
-        {/* TODO: bar icon */}
-        {/* TODO: show error msg */}
-      </div>
-      <div>
-        <label htmlFor="input_confirmpassword">input confirm password</label>
-        <input
-          id="input_confirmpassword"
-          type="text"
-          placeholder="confirmpassword"
-          required
-        />
-        {/* TODO: bar icon */}
-        {/* TODO: show error msg */}
-      </div>
+
+      {/* input containers */}
+      {states.map((state, idx) => (
+        <div key={idx}>
+          <label htmlFor={`input_${state}`}>input {state}</label>
+          <input
+            id={`input_${state}`}
+            type={state}
+            placeholder={state}
+            onChange={(e) => handleSignUpState(state, e.target.value)}
+            value={signUpState[state]}
+            required
+          />
+          {/* TODO: bar icon */}
+          {/* TODO: show error msg */}
+        </div>
+      ))}
+
       <button>회원가입</button>
+
       <div>
         이미 회원이신가요?<Link to={"/signin"}>로그인</Link>
       </div>

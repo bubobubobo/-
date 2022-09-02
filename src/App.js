@@ -10,14 +10,14 @@ import { useState, useEffect } from "react";
 // Redux
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import signed from "./reducers/signed";
+import reducer from "./reducers/reducer";
 
 // firebase
 import app, { auth } from "./firebase";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 function App() {
-  const store = configureStore(signed);
+  const store = configureStore({ reducer });
 
   return (
     <Provider store={store}>

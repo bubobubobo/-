@@ -1,8 +1,5 @@
-const open = (isOpened) => {
-  return {
-    type: "TOGGLE_ANSWER",
-    isOpened: !isOpened,
-  };
-};
+import { createAction } from "@reduxjs/toolkit";
 
-export default open;
+const toggleAnswer = createAction("TOGGLE_ANSWER");
+
+export default toggleAnswer;

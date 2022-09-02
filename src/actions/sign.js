@@ -1,17 +1,6 @@
-// TODO: verify email, password
+import { createAction } from "@reduxjs/toolkit";
 
-const signIn = (nickname) => {
-  return {
-    type: "SIGNIN",
-    nickname,
-  };
-};
-
-const logOut = () => {
-  return {
-    type: "LOGOUT",
-    nickname: "",
-  };
-};
+const signIn = createAction("SIGNIN");
+const logOut = createAction("LOGOUT");
 
 export { signIn, logOut };

@@ -1,16 +1,16 @@
-const signed = (state = { nickname: "", isSigned: false }, action) => {
-  const { type, nickname } = action;
+import { createReducer } from "@reduxjs/toolkit";
 
-  switch (type) {
-    case "SIGNIN":
-      return { nickname, isSigned: true };
+const initState = { nickname: "", isSigned: false };
 
-    case "LOGOUT":
-      return { nickname, isSigned: false };
-
-    default:
-      return state;
-  }
-};
+const signed = createReducer(initState, {
+  SIGNIN: (state, action) => ({
+    nickname: action.payload,
+    isSigned: true,
+  }),
+  LOGOUT: (state, action) => ({
+    nickname: action.payload,
+    isSigned: false,
+  }),
+});
 
 export default signed;

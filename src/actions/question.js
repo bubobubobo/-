@@ -1,8 +1,5 @@
-const question = (idx) => {
-  return {
-    type: "NEW_QUESTION",
-    idx,
-  };
-};
+import { createAction } from "@reduxjs/toolkit";
 
-export default question;
+const newQuestion = createAction("NEW_QUESTION");
+
+export default newQuestion;
