@@ -7,19 +7,28 @@ import SignUp from "./components/SignUp";
 // React hooks
 import { useState, useEffect } from "react";
 
+// Redux
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import signed from "./reducers/signed";
+
 // firebase
 import app, { auth } from "./firebase";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 function App() {
+  const store = configureStore(signed);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

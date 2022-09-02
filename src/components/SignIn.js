@@ -1,7 +1,17 @@
+// react
 import React from "react";
 import { Link } from "react-router-dom";
 
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import signIn from "../actions/sign";
+
 const SignIn = () => {
+  const signed = useSelector((state) => state);
+  console.log(signed);
+
+  const dispatch = useDispatch();
+
   return (
     <form>
       <Link to={"/"}>SHOW ME</Link>
@@ -26,7 +36,7 @@ const SignIn = () => {
         {/* TODO: bar icon */}
         {/* TODO: show error msg */}
       </div>
-      <button>로그인</button>
+      <button onClick={dispatch(signIn("phyzee"))}>로그인</button>
       <div>
         아직 회원이 아니신가요?<Link to={"/signup"}>회원가입</Link>
       </div>
