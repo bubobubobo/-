@@ -2,6 +2,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+// firebase - auth
+import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 const SignUp = () => {
   // local state
   const [signUpState, setSignUpState] = useState({
@@ -19,7 +23,23 @@ const SignUp = () => {
     setSignUpState({ ...signUpState, [target]: value });
   };
 
-  const handleSignUp = () => {};
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    const { email, nickname, password } = signUpState;
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        user.displayName = nickname;
+        console.log(user);
+        console.log(user.displayName);
+      })
+      .catch((err) => {
+        // TODO: 동일한 이메일 에러 처리
+        console.error(
+          `error code : ${err.code}, error message: ${err.message}`
+        );
+      });
+  };
 
   // SignUp template
   return (
