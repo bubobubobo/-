@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 // firebase - auth
 import { auth } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const SignUp = () => {
   // local state
@@ -29,9 +29,9 @@ const SignUp = () => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        user.displayName = nickname;
-        console.log(user);
-        console.log(user.displayName);
+        updateProfile(user, {
+          displayName: nickname,
+        });
       })
       .catch((err) => {
         // TODO: 동일한 이메일 에러 처리

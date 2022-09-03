@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signIn } from "../actions/sign";
 
+// firebase - auth
+import { auth } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 const SignIn = () => {
   // dispatcher
   const dispatch = useDispatch();
@@ -21,11 +25,20 @@ const SignIn = () => {
     setSignInState({ ...signInState, [target]: value });
   };
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
-    console.log(1);
-    // TODO: nickname 줄 것!
-    dispatch(signIn("phyzee"));
+    const { email, password } = signInState;
+
+    await signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        dispatch(signIn(user.displayName));
+      })
+      .catch((err) => {
+        console.error(
+          `error code : ${err.code}, error message: ${err.message}`
+        );
+      });
   };
 
   // SignIn template
