@@ -1,6 +1,7 @@
 # 쇼미
 
 Show me what you got.
+
 기술면접 준비용 랜덤 문제 생성 서비스
 
 ## Figma Design
