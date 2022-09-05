@@ -1,5 +1,5 @@
 const HitMe = () => {
-  return <div>Hit Me!</div>;
+  return <button>Hit me!</button>;
 };
 
 export default HitMe;

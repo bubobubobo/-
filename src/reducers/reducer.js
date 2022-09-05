@@ -4,7 +4,7 @@ import signed from "./signed";
 import isOpened from "./isOpened";
 
 export default combineReducers({
-  // question,
+  question,
   signed,
   // isOpened,
 });

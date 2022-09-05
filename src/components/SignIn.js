@@ -5,10 +5,16 @@ import { Link, useNavigate } from "react-router-dom";
 // redux
 import { useDispatch } from "react-redux";
 import { signIn } from "../actions/sign";
+import { initQuestions } from "../actions/question";
 
 // firebase - auth
-import { auth } from "../firebase";
+import app, { auth } from "../firebase";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
+
+// firestore db
+const db = getFirestore(app);
+const ref = collection(db, "JS");
 
 const SignIn = () => {
   // navigator
@@ -24,6 +30,16 @@ const SignIn = () => {
   const states = Object.keys(signInState);
 
   // helper
+  // TODO: signin과 signup에 중복해서 사용해야 하는 문제 => trouble shooting
+  const fetchQuestions = async () => {
+    const documents = await getDocs(ref);
+    const questions = documents.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    dispatch(initQuestions(questions));
+  };
+
   const handleSignInState = (target, value) => {
     setSignInState({ ...signInState, [target]: value });
   };
@@ -51,6 +67,8 @@ const SignIn = () => {
 
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        // fetch 먼저
+        fetchQuestions();
         const user = userCredential.user;
         dispatch(signIn(user.displayName));
         navigate("/");

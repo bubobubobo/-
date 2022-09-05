@@ -3,11 +3,11 @@ import { createReducer } from "@reduxjs/toolkit";
 const initState = { nickname: "", isSigned: false };
 
 const signed = createReducer(initState, {
-  SIGNIN: (state, action) => ({
+  SIGNIN: (_, action) => ({
     nickname: action.payload,
     isSigned: true,
   }),
-  LOGOUT: (state, action) => ({
+  LOGOUT: (_, action) => ({
     nickname: action.payload,
     isSigned: false,
   }),

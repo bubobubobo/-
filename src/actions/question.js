@@ -1,5 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
 
-const newQuestion = createAction("NEW_QUESTION");
+const initQuestions = createAction("INIT_QUESTIONS");
+const getNewQuestion = createAction("GET_NEW_QUESTION");
 
-export default newQuestion;
+export { initQuestions, getNewQuestion };

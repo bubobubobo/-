@@ -6,14 +6,20 @@ import SuccessModal from "./SuccessModal";
 // redux
 import { useDispatch } from "react-redux";
 import { signIn } from "../actions/sign";
+import { initQuestions } from "../actions/question";
 
-// firebase - auth
-import { auth } from "../firebase";
+// firebase
+import app, { auth } from "../firebase";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+
+// firestore db
+const db = getFirestore(app);
+const ref = collection(db, "JS");
 
 const SignUp = () => {
   // local state
@@ -33,6 +39,16 @@ const SignUp = () => {
   const states = Object.keys(signUpState);
 
   // helper
+  // TODO: signin과 signup에 중복해서 사용해야 하는 문제 => trouble shooting
+  const fetchQuestions = async () => {
+    const documents = await getDocs(ref);
+    const questions = documents.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    dispatch(initQuestions(questions));
+  };
+
   const handleSignUpState = (target, value) => {
     setSignUpState({ ...signUpState, [target]: value });
   };
@@ -79,6 +95,7 @@ const SignUp = () => {
     await createUserWithEmailAndPassword(auth, email, password.trim())
       // signUp
       .then((userCredential) => {
+        fetchQuestions();
         const user = userCredential.user;
         updateProfile(user, {
           displayName: nickname,
