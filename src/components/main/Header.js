@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 const Header = () => {
   // global state
   const { nickname, isSigned } = useSelector((state) => state.signed);
-  console.log(nickname);
 
   // local state
   const [greetingMsg, setGreetingMsg] = useState("");

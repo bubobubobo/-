@@ -1,6 +1,6 @@
 // react
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // redux
 import { useDispatch } from "react-redux";
@@ -11,11 +11,14 @@ import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 const SignIn = () => {
+  // navigator
+  const navigate = useNavigate();
   // dispatcher
   const dispatch = useDispatch();
 
   // local state
   const [signInState, setSignInState] = useState({ email: "", password: "" });
+  const [error, setError] = useState({ target: null, message: "" });
 
   // signin info array
   const states = Object.keys(signInState);
@@ -23,6 +26,23 @@ const SignIn = () => {
   // helper
   const handleSignInState = (target, value) => {
     setSignInState({ ...signInState, [target]: value });
+  };
+
+  const handleSignInError = (err) => {
+    const code = err.code;
+    switch (code) {
+      case "auth/user-not-found":
+        setError({ target: "email", message: "존재하지 않는 이메일 입니다." });
+        return;
+      case "auth/wrong-password":
+        setError({
+          target: "password",
+          message: "비밀번호가 일치하지 않습니다.",
+        });
+        return;
+      default:
+        return;
+    }
   };
 
   const handleSignIn = async (e) => {
@@ -33,11 +53,10 @@ const SignIn = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         dispatch(signIn(user.displayName));
+        navigate("/");
       })
       .catch((err) => {
-        console.error(
-          `error code : ${err.code}, error message: ${err.message}`
-        );
+        handleSignInError(err);
       });
   };
 
@@ -61,7 +80,7 @@ const SignIn = () => {
             required
           />
           {/* TODO: bar icon */}
-          {/* TODO: show error msg */}
+          <p>{state === error.target ? error.message : ""}</p>
         </div>
       ))}
 
