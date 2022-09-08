@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 
 const Question = () => {
-  const question = useSelector((state) => state.question);
-  console.log(question);
+  const { question, signed } = useSelector((state) => state);
 
+  // TODO: select random question you coudn't study twodays becaus of me ㅜㅜ
+  // nono I almost finished functions
   return <div>Question box</div>;
 };
 

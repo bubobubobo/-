@@ -1,6 +1,6 @@
 // react
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import SuccessModal from "./SuccessModal";
 
 // redux
@@ -17,11 +17,24 @@ import {
   updateProfile,
 } from "firebase/auth";
 
+// helper functions
+import {
+  isValidEmail,
+  isValidNickName,
+  isValidPassword,
+  isValidConfirmPassword,
+} from "./validation";
+
 // firestore db
 const db = getFirestore(app);
 const ref = collection(db, "JS");
 
 const SignUp = () => {
+  // navigator
+  const navigate = useNavigate();
+  // dispatch
+  const dispatch = useDispatch();
+
   // local state
   const [signUpState, setSignUpState] = useState({
     email: "",
@@ -29,11 +42,23 @@ const SignUp = () => {
     password: "",
     confirm: "",
   });
-  const [modal, setModal] = useState(false);
-  const [error, setError] = useState({ target: null, message: "" });
+  const [signUpSuccess, setSignUpSuccess] = useState(false);
+  const [error, setError] = useState(
+    Object.entries(signUpState).reduce(
+      (obj, [key, value]) => ((obj[key] = value), obj),
+      {}
+    )
+  );
 
-  // dispatch
-  const dispatch = useDispatch();
+  const [modal, setModal] = useState(false);
+
+  // custom error messages
+  const errMsg = {
+    email: "이메일 형식에 맞춰 입력해주세요.",
+    nickname: "별명은 공백제외 1글자 이상으로 작성해주세요.",
+    password: "비밀번호는 공백제외 6~12자로 작성해주세요.",
+    confirm: "입력한 비밀번호와 다릅니다.",
+  };
 
   // signup info array
   const states = Object.keys(signUpState);
@@ -49,20 +74,46 @@ const SignUp = () => {
     dispatch(initQuestions(questions));
   };
 
+  // onChnage event마다 버튼 활성화 체크
+  useEffect(() => {
+    const { email, nickname, password, confirm } = signUpState;
+    if (
+      isValidEmail(email) &&
+      isValidNickName(nickname) &&
+      isValidPassword(password) &&
+      isValidConfirmPassword(password, confirm)
+    )
+      setSignUpSuccess(true);
+    else setSignUpSuccess(false);
+  }, [signUpState]);
+
   const handleSignUpState = (target, value) => {
     setSignUpState({ ...signUpState, [target]: value });
+
+    let targetState = null;
+    if (target === "email") targetState = isValidEmail(value);
+    if (target === "nickname") targetState = isValidNickName(value);
+    if (target === "password") targetState = isValidPassword(value);
+    if (target === "confirm")
+      targetState = isValidConfirmPassword(signUpState.password, value);
+
+    setError({ ...error, [target]: targetState ? "" : errMsg[target] });
   };
 
-  const handleSignUpError = (err) => {
+  const handleApiSignUpError = (err) => {
     const code = err.code;
     switch (code) {
+      case "auth/user-not-found":
+        setError({ ...error, email: "존재하지 않는 이메일입니다." });
+        return;
       case "auth/email-already-in-use":
-        setError({ target: "email", message: "이미 존재하는 이메일입니다." });
+        setError({ ...error, email: "이미 존재하는 이메일입니다." });
         return;
       case "auth/weak-password":
         setError({
-          target: "password",
-          message: "비밀번호는 양 끝 공백을 제외한 6자리 이상이어야 합니다.",
+          ...error,
+          password:
+            "비밀번호는 공백을 제외하고 6자 이상, 12자 이하여야 합니다.",
         });
         return;
       default:
@@ -70,29 +121,12 @@ const SignUp = () => {
     }
   };
 
-  // 빈 문자열만 아니면 됨.
-  const isValidNickName = (nickname) => !!nickname.trim();
-
-  // 동일해야 함.
-  const isValidConfirmPassword = (password, confirm) =>
-    password.trim() === confirm.trim();
-
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const { email, nickname, password, confirm } = signUpState;
-
-    // TODO: Error의 순서를 고려해 error handling 할 좋은 방법을 찾을 것.
-    if (!isValidNickName(nickname)) {
-      setError({ target: "nickname", message: "사용할 수 없는 별명입니다." });
-      throw new Error("invalid-nickname");
-    }
-    if (!isValidConfirmPassword(password, confirm)) {
-      setError({ target: "confirm", message: "비밀번호와 일치하지 않습니다." });
-      throw new Error("wrong-confirm-password");
-    }
+    const { email, nickname, password } = signUpState;
 
     // 계정 생성
-    await createUserWithEmailAndPassword(auth, email, password.trim())
+    await createUserWithEmailAndPassword(auth, email, password)
       // signUp
       .then((userCredential) => {
         fetchQuestions();
@@ -100,17 +134,21 @@ const SignUp = () => {
         updateProfile(user, {
           displayName: nickname,
         });
+        setModal(true);
       })
       .catch((err) => {
-        handleSignUpError(err);
+        handleApiSignUpError(err);
       });
+  };
 
+  const signInAfterSignUp = async () => {
     // 생성에 성공하면 자동 로그인
-    await signInWithEmailAndPassword(auth, email, password.trim()).then(
+    const { email, password } = signUpState;
+    await signInWithEmailAndPassword(auth, email, password).then(
       (userCredential) => {
         const user = userCredential.user;
         dispatch(signIn(user.displayName));
-        setModal(true);
+        navigate("/");
       }
     );
   };
@@ -135,14 +173,14 @@ const SignUp = () => {
             required
           />
           {/* TODO: bar icon */}
-          <p>{state === error.target ? error.message : ""}</p>
+          <p>{error[state]}</p>
         </div>
       ))}
-      <button>회원가입</button>
+      <button disabled={signUpSuccess ? false : true}>회원가입</button>
       <div>
         이미 회원이신가요?<Link to={"/signin"}>로그인</Link>
       </div>
-      {modal ? <SuccessModal /> : null}
+      {modal ? <SuccessModal signInAfterSignUp={signInAfterSignUp} /> : null}
     </form>
   );
 };

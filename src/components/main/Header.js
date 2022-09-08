@@ -18,8 +18,8 @@ const Header = () => {
 
     if (h >= 0 && h < 6) setGreetingMsg("조용한 밤이군요,");
     if (h >= 6 && h < 11) setGreetingMsg("좋은 아침이에요,");
-    if (h >= 11 && h < 15) setGreetingMsg("점심은 드셨나요?");
-    if (h >= 15 && h < 19) setGreetingMsg("저녁은 드셨나요?");
+    if (h >= 11 && h < 17) setGreetingMsg("점심은 드셨나요?");
+    if (h >= 17 && h < 19) setGreetingMsg("저녁은 드셨나요?");
     if (h >= 19 && h <= 23) setGreetingMsg("좋은 밤이에요,");
   }, []);
 

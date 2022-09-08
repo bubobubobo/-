@@ -1,5 +1,5 @@
 // react
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 // redux
@@ -11,6 +11,9 @@ import { initQuestions } from "../actions/question";
 import app, { auth } from "../firebase";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
+
+// helper functions
+import { isValidEmail, isValidPassword } from "./validation";
 
 // firestore db
 const db = getFirestore(app);
@@ -24,7 +27,19 @@ const SignIn = () => {
 
   // local state
   const [signInState, setSignInState] = useState({ email: "", password: "" });
-  const [error, setError] = useState({ target: null, message: "" });
+  const [signInSuccess, setSignInSuccess] = useState(false);
+  const [error, setError] = useState(
+    Object.entries(signInState).reduce(
+      (obj, [key, value]) => ((obj[key] = value), obj),
+      {}
+    )
+  );
+
+  // custom error messages
+  const errMsg = {
+    email: "이메일 형식에 맞춰 입력해주세요.",
+    password: "비밀번호는 공백제외 6~12자로 작성해주세요.",
+  };
 
   // signin info array
   const states = Object.keys(signInState);
@@ -40,21 +55,32 @@ const SignIn = () => {
     dispatch(initQuestions(questions));
   };
 
+  // onChange event마다 버튼 활성화 체크
+  useEffect(() => {
+    const { email, password } = signInState;
+    if (isValidEmail(email) && isValidPassword(password))
+      setSignInSuccess(true);
+    else setSignInSuccess(false);
+  }, [signInState]);
+
   const handleSignInState = (target, value) => {
     setSignInState({ ...signInState, [target]: value });
+
+    let targetState = null;
+    if (target === "email") targetState = isValidEmail(value);
+    if (target === "password") targetState = isValidPassword(value);
+
+    setError({ ...error, [target]: targetState ? "" : errMsg[target] });
   };
 
-  const handleSignInError = (err) => {
+  const handleApiSignInError = (err) => {
     const code = err.code;
     switch (code) {
       case "auth/user-not-found":
-        setError({ target: "email", message: "존재하지 않는 이메일 입니다." });
+        setError({ ...error, email: "존재하지 않는 이메일 입니다." });
         return;
       case "auth/wrong-password":
-        setError({
-          target: "password",
-          message: "비밀번호가 일치하지 않습니다.",
-        });
+        setError({ ...error, password: "비밀번호가 일치하지 않습니다." });
         return;
       default:
         return;
@@ -67,14 +93,14 @@ const SignIn = () => {
 
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // fetch 먼저
+        // 로그인에 성공하면 질문들을 fetch하고 메인 페이지로 넘어감
         fetchQuestions();
         const user = userCredential.user;
         dispatch(signIn(user.displayName));
         navigate("/");
       })
       .catch((err) => {
-        handleSignInError(err);
+        handleApiSignInError(err);
       });
   };
 
@@ -92,17 +118,19 @@ const SignIn = () => {
           <input
             id={`input_${state}`}
             type={state}
-            placeholder={state === "confirm" ? "confirm password" : state}
-            onChange={(e) => handleSignInState(state, e.target.value)}
+            placeholder={state}
+            onChange={(e) => {
+              handleSignInState(state, e.target.value);
+            }}
             value={signInState[state]}
             required
           />
           {/* TODO: bar icon */}
-          <p>{state === error.target ? error.message : ""}</p>
+          <p>{error[state]}</p>
         </div>
       ))}
 
-      <button>로그인</button>
+      <button disabled={signInSuccess ? false : true}>로그인</button>
 
       <div>
         아직 회원이 아니신가요?<Link to={"/signup"}>회원가입</Link>
