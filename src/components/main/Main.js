@@ -5,11 +5,16 @@ import StopWatch from "./StopWatch";
 import Question from "./Question";
 import Answer from "./Answer";
 
+// react
+import { useState } from "react";
+
 // redux
 import { useSelector } from "react-redux";
 
 const Main = () => {
   const { isSigned } = useSelector((state) => state.signed);
+
+  const [isOpened, setIsOpened] = useState(false);
 
   return (
     <div>
@@ -19,7 +24,8 @@ const Main = () => {
         <>
           <StopWatch />
           <Question />
-          <Answer />
+          <button onClick={() => setIsOpened(!isOpened)}>?</button>
+          {isOpened ? <Answer /> : null}
         </>
       )}
     </div>

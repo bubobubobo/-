@@ -4,17 +4,10 @@ import Main from "./components/main/Main";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 
-// React hooks
-import { useState, useEffect } from "react";
-
 // Redux
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import reducer from "./reducers/reducer";
-
-// firebase
-import app, { auth } from "./firebase";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 function App() {
   const store = configureStore({ reducer });

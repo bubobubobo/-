@@ -1,7 +1,10 @@
-import React from "react";
+import { useSelector } from "react-redux";
 
 const Answer = () => {
-  return <div>Aanswer box</div>;
+  const { question } = useSelector((state) => state);
+  const { selected } = question;
+
+  return <div>{selected.length ? selected[0]["answer"] : null}</div>;
 };
 
 export default Answer;
