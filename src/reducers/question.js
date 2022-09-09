@@ -11,9 +11,10 @@ const question = createReducer(initState, {
   },
   GET_NEW_QUESTION: (state, action) => {
     const idx = action.payload;
+    const { questionList, selected } = state;
     return {
-      questionList: state.question.filter((_, i) => i !== idx),
-      selected: [state.question[idx], ...state.selected],
+      questionList: questionList.filter((_, i) => i !== idx),
+      selected: [questionList[idx], ...selected],
     };
   },
 });
