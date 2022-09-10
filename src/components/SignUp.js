@@ -137,6 +137,7 @@ const SignUp = () => {
         setModal(true);
       })
       .catch((err) => {
+        // 로그인 불가능한 상태일 때만 체크!
         if (!modal) handleApiSignUpError(err);
       });
   };

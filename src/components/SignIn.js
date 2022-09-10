@@ -15,6 +15,55 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 // helper functions
 import { isValidEmail, isValidPassword } from "./validation";
 
+// style
+import styled from "styled-components";
+
+//////////////////////////////////////////////////////////////////////
+// styles
+
+const SignInForm = styled.form`
+  padding: none;
+  margin: none;
+  background: #cbc5c1;
+  height: 100vh;
+`;
+
+const LinkStyle = {
+  textDecoration: "none",
+  fontSize: "1.5em",
+  fontWeight: "600",
+  color: "#193446",
+};
+
+const Header = styled.h1`
+  font-size: 2.5em;
+  text-align: center;
+  color: #ebeced;
+`;
+
+const Label = styled.label`
+  display: none;
+`;
+
+const Input = styled.input`
+    display: block;
+    border: initial;
+    background: #cbc5c1;
+    color: rgba(128, 128, 128, 0.4)
+    margin: 10px auto;
+  `;
+
+const Button = styled.button`
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 4px solid rgba(235, 236, 237, 0.4);
+  border-radius: 8px;
+`;
+
+//////////////////////////////////////////////////////////////////////
+
 // firestore db
 const db = getFirestore(app);
 const ref = collection(db, "JS");
@@ -106,16 +155,19 @@ const SignIn = () => {
 
   // SignIn template
   return (
-    <form onSubmit={handleSignIn}>
-      <Link to={"/"}>SHOW ME</Link>
+    <SignInForm onSubmit={handleSignIn}>
+      <Link to={"/"} style={LinkStyle}>
+        SHOW ME
+      </Link>
 
-      <h1>SIGN IN</h1>
+      <Header>SIGN IN</Header>
+      {/* <h1>SIGN IN</h1> */}
 
       {/* input containers */}
       {states.map((state, idx) => (
         <div key={idx}>
-          <label htmlFor={`input_${state}`}>input {state}</label>
-          <input
+          <Label htmlFor={`input_${state}`}>input {state}</Label>
+          <Input
             id={`input_${state}`}
             type={state}
             placeholder={state}
@@ -130,12 +182,12 @@ const SignIn = () => {
         </div>
       ))}
 
-      <button disabled={signInSuccess ? false : true}>로그인</button>
+      <Button disabled={signInSuccess ? false : true}>로그인</Button>
 
       <div>
         아직 회원이 아니신가요?<Link to={"/signup"}>회원가입</Link>
       </div>
-    </form>
+    </SignInForm>
   );
 };
 
