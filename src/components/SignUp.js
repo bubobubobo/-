@@ -1,7 +1,7 @@
 // react
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import SuccessModal from "./SuccessModal";
+import { SuccessModal } from "./main/Modals";
 
 // redux
 import { useDispatch } from "react-redux";
@@ -36,10 +36,12 @@ const SignUpForm = styled.form`
 `;
 
 const GoHomeLink = {
+  display: "block",
   textDecoration: "none",
-  fontSize: "1.5em",
-  fontWeight: "700",
-  color: "#193446",
+  fontSize: "1.4em",
+  fontWeight: "900",
+  color: "rgba(25, 52, 70, 0.8)",
+  padding: "12px",
 };
 
 const Header = styled.h1`
@@ -63,17 +65,20 @@ const Label = styled.label`
   display: none;
 `;
 
+// 회원가입 시 어떤 정보를 기입해야 하는지 모를 수 있으므로 색을 더 진하게 설정
 const Input = styled.input`
   display: block;
   margin-bottom: 10px;
   padding-left: 0.2em;
+  padding-bottom: 0.3em;
   border: initial;
   border-bottom: 1px solid black;
   width: 100%;
   outline: none;
+  font-size: 1em;
   background: transparent;
   &::placeholder {
-    color: rgba(128, 128, 128, 0.4);
+    color: rgba(128, 128, 128, 0.8);
   }
   // webkit 브라우저에서 자동완성 시 배경 색이 변하는 것 방지
   &:-webkit-autofill {
@@ -99,6 +104,9 @@ const Button = styled.button`
   background: transparent;
   border: 4px solid rgba(235, 236, 237, 0.4);
   border-radius: 8px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const ToSignIn = styled.p`
@@ -269,7 +277,7 @@ const SignUp = () => {
       ))}
       <Button disabled={signUpSuccess ? false : true}>회원가입</Button>
       <ToSignIn>
-        이미 회원이신가요?
+        이미 회원이신가요?{" "}
         <Link to={"/signin"} style={ToSignInLink}>
           로그인
         </Link>

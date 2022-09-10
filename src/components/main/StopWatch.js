@@ -1,5 +1,48 @@
 import { useEffect, useState } from "react";
 
+// style
+import styled from "styled-components";
+
+//////////////////////////////////////////////////////////////////////
+// styles
+const StyledStopWatch = styled.div`
+  width: 100%;
+  height: 200px;
+  margin-top: 60px;
+`;
+
+const Time = styled.p`
+  font-size: 3em;
+  font-weight: 900;
+  letter-spacing: 8px;
+  color: ${(props) => props.theme.timer};
+  text-align: center;
+`;
+
+const Control = styled.div`
+  ${(props) => props.theme.flexBox("row", "center", "center")}
+  margin-top: 40px;
+`;
+
+const ControlButton = styled.button`
+  width: 15%;
+  height: 30px;
+  border: initial;
+  border-radius: 6px;
+  margin-left: 1em;
+  margin-right: 1em;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: ${(props) => props.theme.font_white};
+  background: ${(props) => props.theme.bg_basic};
+  box-shadow: 2px 2px 2px gray;
+  &:hover {
+    box-shadow: 4px 4px 4px gray;
+  }
+`;
+
+//////////////////////////////////////////////////////////////////////
+
 const StopWatch = () => {
   /**
    * <구현 방식>
@@ -70,15 +113,17 @@ const StopWatch = () => {
   };
 
   return (
-    <div>
-      <span>{getTime(time)}</span>
-      {isRunning ? (
-        <button onClick={stop}>STOP</button>
-      ) : (
-        <button onClick={start}>START</button>
-      )}
-      <button onClick={reset}>RESET</button>
-    </div>
+    <StyledStopWatch>
+      <Time>{getTime(time)}</Time>
+      <Control>
+        {isRunning ? (
+          <ControlButton onClick={stop}>STOP</ControlButton>
+        ) : (
+          <ControlButton onClick={start}>START</ControlButton>
+        )}
+        <ControlButton onClick={reset}>RESET</ControlButton>
+      </Control>
+    </StyledStopWatch>
   );
 };
 

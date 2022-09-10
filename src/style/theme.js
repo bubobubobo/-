@@ -5,7 +5,9 @@ export const theme = {
   bg_main: "#A2AAB0",
   bg_box: "#4C586F",
   accent: "#193446",
+  timer: "#36384C",
   font_white: "#EBECED",
+  font_modal: "#F5F5DC",
   placeholder: "#808080",
 
   absoluteCenter: css`

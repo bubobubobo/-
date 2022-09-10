@@ -26,10 +26,12 @@ const SignInForm = styled.form`
 `;
 
 const GoHomeLink = {
+  display: "block",
   textDecoration: "none",
-  fontSize: "1.5em",
-  fontWeight: "700",
-  color: "#193446",
+  fontSize: "1.4em",
+  fontWeight: "900",
+  color: "rgba(25, 52, 70, 0.8)",
+  padding: "12px",
 };
 
 const Header = styled.h1`
@@ -57,10 +59,12 @@ const Input = styled.input`
   display: block;
   margin-bottom: 10px;
   padding-left: 0.2em;
+  padding-bottom: 0.3em;
   border: initial;
   border-bottom: 1px solid black;
   width: 100%;
   outline: none;
+  font-size: 1em;
   background: transparent;
   &::placeholder {
     color: rgba(128, 128, 128, 0.4);
@@ -226,7 +230,7 @@ const SignIn = () => {
       <Button disabled={signInSuccess ? false : true}>로그인</Button>
 
       <ToSignUp>
-        아직 회원이 아니신가요?
+        아직 회원이 아니신가요?{" "}
         <Link to={"/signup"} style={ToSignUpLink}>
           회원가입
         </Link>

@@ -5,7 +5,43 @@ import { getNewQuestion } from "../../actions/question";
 
 import { ReqSignInModal, FinishModal } from "./Modals";
 
-const HitMe = () => {
+// style
+import styled, { keyframes } from "styled-components";
+
+//////////////////////////////////////////////////////////////////////
+// styles
+const shake = keyframes`
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+`;
+
+const StyledHitMe = styled.button`
+  margin-top: 60px;
+  font-size: 3em;
+  font-weight: 700;
+  color: ${(props) => props.theme.font_white};
+  text-shadow: 4px 4px 4px gray;
+  background: transparent;
+  border: initial;
+  &:hover {
+    animation: ${shake} 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    transform: translate3d(0, 0, 0);
+    perspective: 1000px;
+  }
+`;
+//////////////////////////////////////////////////////////////////////
+
+const HitMe = ({ setIsOpened }) => {
   const { question, signed } = useSelector((state) => state);
   const { questionList } = question;
   const { isSigned } = signed;
@@ -23,13 +59,15 @@ const HitMe = () => {
     if (!isSigned) return setModal(true);
 
     const idx = generateRandomIdx();
-    if (questionList.length) dispatch(getNewQuestion(idx));
-    else setFinish(true);
+    if (questionList.length) {
+      dispatch(getNewQuestion(idx));
+      setIsOpened(false);
+    } else setFinish(true);
   };
 
   return (
     <>
-      <button onClick={handleHitMe}>Hit me!</button>
+      <StyledHitMe onClick={handleHitMe}>Hit me!</StyledHitMe>
       {modal ? <ReqSignInModal /> : null}
       {finish ? <FinishModal /> : null}
     </>

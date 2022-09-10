@@ -5,6 +5,47 @@ import { Link } from "react-router-dom";
 // redux
 import { useSelector } from "react-redux";
 
+// style
+import styled from "styled-components";
+
+//////////////////////////////////////////////////////////////////////
+// styles
+const StyledHeader = styled.header`
+  width: 100%;
+  height: 70px;
+  background: ${(props) => props.theme.bg_basic};
+  // flexbox
+  ${(props) => props.theme.flexBox("row", "center", "space-between")};
+  padding-left: 1em;
+  padding-right: 1em;
+  box-shadow: 0 4px 4px gray;
+`;
+
+const Logo = styled.h1`
+  font-size: 1.8em;
+  font-weight: 900;
+  color: ${(props) => props.theme.accent};
+`;
+
+const LinkStyle = {
+  display: "inline-block",
+  marginLeft: "0.6em",
+  fontWeight: "400",
+  textDecoration: "none",
+  fontSize: "1.5em",
+  color: "#EBECED",
+};
+
+const Greeting = styled.p`
+  color: ${(props) => props.theme.accent};
+`;
+
+const Nickname = styled.span`
+  font-weight: 500;
+`;
+
+//////////////////////////////////////////////////////////////////////
+
 const Header = () => {
   // global state
   const { nickname, isSigned } = useSelector((state) => state.signed);
@@ -25,22 +66,26 @@ const Header = () => {
 
   // Header template
   return (
-    <div>
-      <h1>SHOW ME WHAT YOU GOT</h1>
+    <StyledHeader>
+      <Logo>SHOW ME WHAT YOU GOT</Logo>
 
       <div>
         {isSigned ? (
-          <div>
-            {greetingMsg} {nickname}님
-          </div>
+          <Greeting>
+            {greetingMsg} <Nickname>{nickname + " "}</Nickname>님
+          </Greeting>
         ) : (
           <div>
-            <Link to={"/signin"}>signin</Link>
-            <Link to={"/signup"}>signup</Link>
+            <Link to={"/signin"} style={LinkStyle}>
+              signin
+            </Link>
+            <Link to={"/signup"} style={LinkStyle}>
+              signup
+            </Link>
           </div>
         )}
       </div>
-    </div>
+    </StyledHeader>
   );
 };
 
