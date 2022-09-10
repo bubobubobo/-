@@ -20,25 +20,33 @@ import styled from "styled-components";
 
 //////////////////////////////////////////////////////////////////////
 // styles
-
 const SignInForm = styled.form`
-  padding: none;
-  margin: none;
-  background: #cbc5c1;
+  background: ${(props) => props.theme.bg_basic};
   height: 100vh;
 `;
 
 const LinkStyle = {
   textDecoration: "none",
   fontSize: "1.5em",
-  fontWeight: "600",
+  fontWeight: "700",
   color: "#193446",
 };
 
 const Header = styled.h1`
   font-size: 2.5em;
+  font-weight: 900;
   text-align: center;
-  color: #ebeced;
+  color: ${(props) => props.theme.font_white};
+  margin-top: 100px;
+  margin-bottom: 150px;
+`;
+
+const InputField = styled.div`
+  height: 100px;
+  width: 50%;
+  min-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const Label = styled.label`
@@ -46,22 +54,52 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-    display: block;
-    border: initial;
-    background: #cbc5c1;
-    color: rgba(128, 128, 128, 0.4)
-    margin: 10px auto;
-  `;
+  display: block;
+  margin-bottom: 10px;
+  padding-left: 0.2em;
+  border: initial;
+  border-bottom: 1px solid black;
+  width: 100%;
+  outline: none;
+  background: transparent;
+  &::placeholder {
+    color: rgba(128, 128, 128, 0.4);
+  }
+  // webkit 브라우저에서 자동완성 시 배경 색이 변하는 것 방지
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px ${(props) => props.theme.bg_basic} inset;
+  }
+`;
+
+const Error = styled.p`
+  font-size: 0.7em;
+  padding-left: 0.2em;
+  color: red;
+`;
 
 const Button = styled.button`
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  display: block;
+  height: 50px;
+  width: 50%;
+  min-width: 300px;
+  margin: 0 auto 20px;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: ${(props) => props.theme.accent};
   background: transparent;
   border: 4px solid rgba(235, 236, 237, 0.4);
   border-radius: 8px;
 `;
 
+const ToSignUp = styled.p`
+  text-align: center;
+  font-size: 1.2em;
+  color: ${(props) => props.theme.font_white};
+`;
+
+const ToSignUpLink = {
+  color: "#4C586F",
+};
 //////////////////////////////////////////////////////////////////////
 
 // firestore db
@@ -165,7 +203,7 @@ const SignIn = () => {
 
       {/* input containers */}
       {states.map((state, idx) => (
-        <div key={idx}>
+        <InputField key={idx}>
           <Label htmlFor={`input_${state}`}>input {state}</Label>
           <Input
             id={`input_${state}`}
@@ -178,15 +216,18 @@ const SignIn = () => {
             required
           />
           {/* TODO: bar icon */}
-          <p>{error[state]}</p>
-        </div>
+          <Error>{error[state]}</Error>
+        </InputField>
       ))}
 
       <Button disabled={signInSuccess ? false : true}>로그인</Button>
 
-      <div>
-        아직 회원이 아니신가요?<Link to={"/signup"}>회원가입</Link>
-      </div>
+      <ToSignUp>
+        아직 회원이 아니신가요?
+        <Link to={"/signup"} style={ToSignUpLink}>
+          회원가입
+        </Link>
+      </ToSignUp>
     </SignInForm>
   );
 };

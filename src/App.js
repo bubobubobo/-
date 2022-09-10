@@ -9,22 +9,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import reducer from "./reducers/reducer";
 
-// style
-import { createGlobalStyle } from "styled-components";
-
-// for body style
-const GlobalStyle = createGlobalStyle`
-  body {
-    margin: initial;
-  }
-`;
-
 function App() {
   const store = configureStore({ reducer });
 
   return (
     <Provider store={store}>
-      <GlobalStyle />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />} />
