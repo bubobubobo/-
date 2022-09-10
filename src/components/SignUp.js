@@ -25,6 +25,94 @@ import {
   isValidConfirmPassword,
 } from "./validation";
 
+// style
+import styled from "styled-components";
+
+//////////////////////////////////////////////////////////////////////
+// styles
+const SignUpForm = styled.form`
+  background: ${(props) => props.theme.bg_basic};
+  height: 100vh;
+`;
+
+const GoHomeLink = {
+  textDecoration: "none",
+  fontSize: "1.5em",
+  fontWeight: "700",
+  color: "#193446",
+};
+
+const Header = styled.h1`
+  font-size: 2.5em;
+  font-weight: 900;
+  text-align: center;
+  color: ${(props) => props.theme.font_white};
+  margin-top: 100px;
+  margin-bottom: 150px;
+`;
+
+const InputField = styled.div`
+  height: 100px;
+  width: 50%;
+  min-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const Label = styled.label`
+  display: none;
+`;
+
+const Input = styled.input`
+  display: block;
+  margin-bottom: 10px;
+  padding-left: 0.2em;
+  border: initial;
+  border-bottom: 1px solid black;
+  width: 100%;
+  outline: none;
+  background: transparent;
+  &::placeholder {
+    color: rgba(128, 128, 128, 0.4);
+  }
+  // webkit 브라우저에서 자동완성 시 배경 색이 변하는 것 방지
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px ${(props) => props.theme.bg_basic} inset;
+  }
+`;
+
+const Error = styled.p`
+  font-size: 0.7em;
+  padding-left: 0.2em;
+  color: red;
+`;
+
+const Button = styled.button`
+  display: block;
+  height: 50px;
+  width: 50%;
+  min-width: 300px;
+  margin: 0 auto 20px;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: ${(props) => (props.disabled ? "" : props.theme.accent)};
+  background: transparent;
+  border: 4px solid rgba(235, 236, 237, 0.4);
+  border-radius: 8px;
+`;
+
+const ToSignIn = styled.p`
+  text-align: center;
+  font-size: 1.2em;
+  color: ${(props) => props.theme.font_white};
+`;
+
+const ToSignInLink = {
+  color: "#4C586F",
+};
+
+//////////////////////////////////////////////////////////////////////
+
 // firestore db
 const db = getFirestore(app);
 const ref = collection(db, "JS");
@@ -156,16 +244,18 @@ const SignUp = () => {
 
   // SignUp template
   return (
-    <form onSubmit={handleSignUp}>
-      <Link to={"/"}>SHOW ME</Link>
-      <h1>SIGN UP</h1>
+    <SignUpForm onSubmit={handleSignUp}>
+      <Link to={"/"} style={GoHomeLink}>
+        SHOW ME
+      </Link>
+      <Header>SIGN UP</Header>
       {/* input containers */}
       {states.map((state, idx) => (
-        <div key={idx}>
-          <label htmlFor={`input_${state}`}>
+        <InputField key={idx}>
+          <Label htmlFor={`input_${state}`}>
             input {state === "confirm" ? "confirm password" : state}
-          </label>
-          <input
+          </Label>
+          <Input
             id={`input_${state}`}
             type={state === "confirm" ? "password" : state}
             placeholder={state}
@@ -174,15 +264,18 @@ const SignUp = () => {
             required
           />
           {/* TODO: bar icon */}
-          <p>{error[state]}</p>
-        </div>
+          <Error>{error[state]}</Error>
+        </InputField>
       ))}
-      <button disabled={signUpSuccess ? false : true}>회원가입</button>
-      <div>
-        이미 회원이신가요?<Link to={"/signin"}>로그인</Link>
-      </div>
+      <Button disabled={signUpSuccess ? false : true}>회원가입</Button>
+      <ToSignIn>
+        이미 회원이신가요?
+        <Link to={"/signin"} style={ToSignInLink}>
+          로그인
+        </Link>
+      </ToSignIn>
       {modal ? <SuccessModal signInAfterSignUp={signInAfterSignUp} /> : null}
-    </form>
+    </SignUpForm>
   );
 };
 

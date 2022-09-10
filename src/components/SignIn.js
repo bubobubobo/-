@@ -25,7 +25,7 @@ const SignInForm = styled.form`
   height: 100vh;
 `;
 
-const LinkStyle = {
+const GoHomeLink = {
   textDecoration: "none",
   fontSize: "1.5em",
   fontWeight: "700",
@@ -85,10 +85,13 @@ const Button = styled.button`
   margin: 0 auto 20px;
   font-size: 1.2em;
   font-weight: 700;
-  color: ${(props) => props.theme.accent};
+  color: ${(props) => (props.disabled ? "" : props.theme.accent)};
   background: transparent;
   border: 4px solid rgba(235, 236, 237, 0.4);
   border-radius: 8px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const ToSignUp = styled.p`
@@ -194,7 +197,7 @@ const SignIn = () => {
   // SignIn template
   return (
     <SignInForm onSubmit={handleSignIn}>
-      <Link to={"/"} style={LinkStyle}>
+      <Link to={"/"} style={GoHomeLink}>
         SHOW ME
       </Link>
 
