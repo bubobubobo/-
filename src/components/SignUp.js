@@ -137,7 +137,7 @@ const SignUp = () => {
         setModal(true);
       })
       .catch((err) => {
-        handleApiSignUpError(err);
+        if (!modal) handleApiSignUpError(err);
       });
   };
 
