@@ -6,12 +6,13 @@ import styled from "styled-components";
 // styles
 const StyledWrapper = styled.div`
   display: block;
+  width: 80%;
+  min-height: 12rem;
   position: relative;
   ${(props) => props.theme.flexBox("column", "center", "center")}
-  margin-top: 40px;
   padding: 8px;
-  width: 80%;
-  min-height: 200px;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
   background: ${(props) => props.theme.bg_box};
   border-radius: 10px;
   box-shadow: 2px 2px 2px gray;
@@ -19,9 +20,9 @@ const StyledWrapper = styled.div`
 
 const StyledAnswer = styled.p`
   display: block;
-  text-align: center;
   font-weight: 600;
   color: ${(props) => props.theme.font_white};
+  text-align: center;
 `;
 //////////////////////////////////////////////////////////////////////
 

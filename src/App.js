@@ -1,8 +1,8 @@
 // Router & pages
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "./components/main/Main";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
+import SignIn from "./components/auth/SignIn";
+import SignUp from "./components/auth/SignUp";
 
 // Redux
 import { configureStore } from "@reduxjs/toolkit";

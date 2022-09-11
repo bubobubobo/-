@@ -10,6 +10,7 @@ import styled, { keyframes } from "styled-components";
 
 //////////////////////////////////////////////////////////////////////
 // styles
+// shaking animation : https://css-tricks.com/snippets/css/shake-css-keyframe-animation/
 const shake = keyframes`
   10%, 90% {
     transform: translate3d(-1px, 0, 0);
@@ -26,8 +27,9 @@ const shake = keyframes`
 `;
 
 const StyledHitMe = styled.button`
-  margin-top: 60px;
-  font-size: 3em;
+  margin-top: 3.75rem;
+  margin-bottom: 1.875rem;
+  font-size: 3rem;
   font-weight: 700;
   color: ${(props) => props.theme.font_white};
   text-shadow: 4px 4px 4px gray;

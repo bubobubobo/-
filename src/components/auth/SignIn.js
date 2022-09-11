@@ -4,11 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 // redux
 import { useDispatch } from "react-redux";
-import { signIn } from "../actions/sign";
-import { initQuestions } from "../actions/question";
+import { signIn } from "../../actions/sign";
+import { initQuestions } from "../../actions/question";
 
 // firebase - auth
-import app, { auth } from "../firebase";
+import app, { auth } from "../../firebase";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
@@ -22,33 +22,41 @@ import styled from "styled-components";
 // styles
 const SignInForm = styled.form`
   background: ${(props) => props.theme.bg_basic};
-  height: 100vh;
 `;
 
 const GoHomeLink = {
   display: "block",
-  textDecoration: "none",
-  fontSize: "1.4em",
+  padding: "0.75rem",
+  fontSize: "1.4rem",
   fontWeight: "900",
   color: "rgba(25, 52, 70, 0.8)",
-  padding: "12px",
+  textDecoration: "none",
 };
 
 const Header = styled.h1`
-  font-size: 2.5em;
+  margin-top: 6.25rem;
+  margin-bottom: 9.375rem;
+  font-size: 2.5rem;
   font-weight: 900;
-  text-align: center;
   color: ${(props) => props.theme.font_white};
-  margin-top: 100px;
-  margin-bottom: 150px;
+  text-align: center;
+
+  @media screen and (max-width: ${(props) => props.theme.tablet}) {
+    margin-bottom: 6.25rem;
+  }
 `;
 
 const InputField = styled.div`
-  height: 100px;
+  height: 7rem;
   width: 50%;
-  min-width: 300px;
+  min-width: 12.5rem;
   margin-left: auto;
   margin-right: auto;
+
+  @media screen and (max-width: ${(props) => props.theme.tablet}) {
+    height: 5rem;
+    width: 60%;
+  }
 `;
 
 const Label = styled.label`
@@ -56,15 +64,14 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  display: block;
+  width: 100%;
+  padding-left: 0.2rem;
+  padding-bottom: 0.3rem;
   margin-bottom: 10px;
-  padding-left: 0.2em;
-  padding-bottom: 0.3em;
   border: initial;
   border-bottom: 1px solid black;
-  width: 100%;
   outline: none;
-  font-size: 1em;
+  font-size: 1.5rem;
   background: transparent;
   &::placeholder {
     color: rgba(128, 128, 128, 0.4);
@@ -73,35 +80,50 @@ const Input = styled.input`
   &:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px ${(props) => props.theme.bg_basic} inset;
   }
+  // TODO: 삼성 브라우저에서도 자동완성 색 변경 되는지 확인
+  &:autofill {
+    box-shadow: 0 0 0 1000px ${(props) => props.theme.bg_basic} inset;
+  }
+
+  @media screen and (max-width: ${(props) => props.theme.tablet}) {
+    font-size: 1rem;
+  }
 `;
 
 const Error = styled.p`
-  font-size: 0.7em;
-  padding-left: 0.2em;
+  font-size: 0.7rem;
+  padding-left: 0.2rem;
   color: red;
 `;
 
 const Button = styled.button`
   display: block;
-  height: 50px;
+  height: 3.125rem;
   width: 50%;
-  min-width: 300px;
-  margin: 0 auto 20px;
-  font-size: 1.2em;
+  min-width: 12.5rem;
+  border: 4px solid rgba(235, 236, 237, 0.4);
+  border-radius: 8px;
+  margin: 1rem auto;
+  font-size: 1.5rem;
   font-weight: 700;
   color: ${(props) => (props.disabled ? "" : props.theme.accent)};
   background: transparent;
-  border: 4px solid rgba(235, 236, 237, 0.4);
-  border-radius: 8px;
   &:hover {
     cursor: pointer;
+  }
+
+  @media screen and (max-width: ${(props) => props.theme.tablet}) {
+    width: 60%;
+    font-size: 1.2rem;
   }
 `;
 
 const ToSignUp = styled.p`
-  text-align: center;
-  font-size: 1.2em;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  font-size: 1.2rem;
   color: ${(props) => props.theme.font_white};
+  text-align: center;
 `;
 
 const ToSignUpLink = {

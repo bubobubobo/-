@@ -7,21 +7,23 @@ import styled from "styled-components";
 // styles
 const QuestionWrapper = styled.div`
   display: block;
+  width: 80%;
+  min-height: 7.5rem;
   position: relative;
   ${(props) => props.theme.flexBox("column", "center", "center")}
-  padding: 8px;
-  width: 80%;
-  min-height: 120px;
-  background: ${(props) => props.theme.bg_box};
   border-radius: 10px;
+  padding: 0.5rem;
+  margin-top: 1.875rem;
+  margin-bottom: 1.2rem;
+  background: ${(props) => props.theme.bg_box};
   box-shadow: 2px 2px 2px gray;
 `;
 
 const StyledQuestion = styled.p`
   display: block;
-  text-align: center;
   font-weight: 600;
   color: ${(props) => props.theme.font_white};
+  text-align: center;
 `;
 
 const ShowAnswer = styled.button`
@@ -30,8 +32,9 @@ const ShowAnswer = styled.button`
   right: 0;
   border: initial;
   background: transparent;
-  font-size: 1.2em;
-  font-weight: 600;
+  font-size: 1.5em;
+  font-weight: 800;
+  color: ${(props) => props.theme.font_white};
   transform: translate3d(0, -100%, 0);
   text-shadow: 2px 2px 2px gray;
   &:hover {

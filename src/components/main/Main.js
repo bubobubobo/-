@@ -18,7 +18,10 @@ import styled from "styled-components";
 // styles
 const StyledMain = styled.main`
   ${(props) => props.theme.flexBox("column", "center", "auto")};
-  height: 100vh;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
   background: ${(props) => props.theme.bg_main};
 `;
 //////////////////////////////////////////////////////////////////////
