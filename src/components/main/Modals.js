@@ -46,14 +46,29 @@ const Nav = styled.button`
   }
 `;
 
-const StyledFinishModal = styled.p`
+const StyledFinishModal = styled.div`
   margin-top: 1rem;
   font-size: 1.2em;
   font-weight: 500;
   color: ${(props) => props.theme.accent};
 `;
 
-// const StyledFinishModal =
+const ResetButton = styled.button`
+  display: block;
+  width: 9rem;
+  margin: 1.5rem auto;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 2rem;
+  color: ${(props) => props.theme.font_white};
+  border: initial;
+  border-radius: 8px;
+  background: ${(props) => props.theme.bg_basic};
+  box-shadow: 2px 2px 2px gray;
+  &:hover {
+    box-shadow: 4px 4px 4px gray;
+  }
+`;
 //////////////////////////////////////////////////////////////////////
 
 const ReqSignInModal = () => {
@@ -81,8 +96,8 @@ const FinishModal = ({ setFinish }) => {
 
   return (
     <StyledFinishModal>
-      모든 문제를 푸셨습니다!🎉
-      <button onClick={handleReset}>초기화</button>
+      <p>🎉모든 문제를 푸셨습니다!🎉</p>
+      <ResetButton onClick={handleReset}>초기화 하기</ResetButton>
     </StyledFinishModal>
   );
 };

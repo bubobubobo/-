@@ -91,10 +91,6 @@ const Input = styled.input`
   &:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px ${(props) => props.theme.bg_basic} inset;
   }
-  // TODO: 삼성 브라우저에서도 자동완성 색 변경 되는지 확인
-  &:autofill {
-    box-shadow: 0 0 0 1000px ${(props) => props.theme.bg_basic} inset;
-  }
 
   @media screen and (max-width: ${(props) => props.theme.tablet}) {
     font-size: 1rem;
@@ -102,9 +98,13 @@ const Input = styled.input`
 `;
 
 const Error = styled.p`
-  font-size: 0.7rem;
+  font-size: 1rem;
   padding-left: 0.2rem;
   color: red;
+
+  @media screen and (max-width: ${(props) => props.theme.tablet}) {
+    font-size: 0.7rem;
+  }
 `;
 
 const Button = styled.button`

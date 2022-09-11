@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 
 // style
 import styled from "styled-components";
+import Solved from "./Solved";
 
 //////////////////////////////////////////////////////////////////////
 // styles
@@ -40,6 +41,7 @@ const Main = () => {
           <StopWatch />
           <Question isOpened={isOpened} setIsOpened={setIsOpened} />
           {isOpened ? <Answer /> : null}
+          <Solved setIsOpened={setIsOpened} />
         </>
       )}
     </StyledMain>

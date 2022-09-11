@@ -17,6 +17,19 @@ const question = createReducer(initState, {
       selected: [questionList[idx], ...selected],
     };
   },
+  GET_SOLVED_QUESTION: (state, action) => {
+    const id = action.payload;
+    const { selected } = state;
+    const targetIdx = selected.map((q) => q.id).indexOf(id);
+    return {
+      ...state,
+      selected: [
+        selected[targetIdx],
+        ...selected.slice(0, targetIdx),
+        ...selected.slice(targetIdx + 1),
+      ],
+    };
+  },
   RESET_QUESTIONS: (state, action) => {
     return {
       questionList: [...state.selected],
