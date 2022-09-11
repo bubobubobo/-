@@ -8,13 +8,13 @@ import SignUp from "./components/auth/SignUp";
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import reducer from "./reducers/reducer";
-import storage from "redux-persist/lib/storage";
+import storageSession from "redux-persist/lib/storage/session";
 import { persistStore, persistReducer } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 
 const persistConfig = {
   key: "root",
-  storage,
+  storage: storageSession,
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);
