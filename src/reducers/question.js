@@ -17,6 +17,12 @@ const question = createReducer(initState, {
       selected: [questionList[idx], ...selected],
     };
   },
+  RESET_QUESTIONS: (state, action) => {
+    return {
+      questionList: [...state.selected],
+      selected: [],
+    };
+  },
 });
 
 export default question;

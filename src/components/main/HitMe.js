@@ -71,7 +71,7 @@ const HitMe = ({ setIsOpened }) => {
     <>
       <StyledHitMe onClick={handleHitMe}>Hit me!</StyledHitMe>
       {modal ? <ReqSignInModal /> : null}
-      {finish ? <FinishModal /> : null}
+      {finish ? <FinishModal setFinish={setFinish} /> : null}
     </>
   );
 };

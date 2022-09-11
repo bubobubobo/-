@@ -31,11 +31,13 @@ const Answer = () => {
   const { selected } = question;
 
   return (
-    <StyledWrapper>
+    <>
       {selected.length ? (
-        <StyledAnswer> {"A. " + selected[0]["answer"]}</StyledAnswer>
+        <StyledWrapper>
+          <StyledAnswer> {"A. " + selected[0]["answer"]}</StyledAnswer>
+        </StyledWrapper>
       ) : null}
-    </StyledWrapper>
+    </>
   );
 };
 

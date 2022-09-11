@@ -1,7 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
+// redux
+import { useDispatch } from "react-redux";
+
 // style
 import styled from "styled-components";
+import { resetQuestion } from "../../actions/question";
 
 //////////////////////////////////////////////////////////////////////
 // styles
@@ -67,8 +71,20 @@ const ReqSignInModal = () => {
   );
 };
 
-const FinishModal = () => {
-  return <StyledFinishModal>모든 문제를 푸셨습니다!🎉</StyledFinishModal>;
+const FinishModal = ({ setFinish }) => {
+  const dispatch = useDispatch();
+
+  const handleReset = () => {
+    setFinish(false);
+    dispatch(resetQuestion());
+  };
+
+  return (
+    <StyledFinishModal>
+      모든 문제를 푸셨습니다!🎉
+      <button onClick={handleReset}>초기화</button>
+    </StyledFinishModal>
+  );
 };
 
 const SuccessModal = (props) => {

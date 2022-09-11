@@ -48,6 +48,8 @@ const Question = ({ isOpened, setIsOpened }) => {
   const { question } = useSelector((state) => state);
   const { selected } = question;
 
+  console.log(question);
+
   // TODO: select random question you coudn't study twodays becaus of me ㅜㅜ
   // nono I almost finished functions
   return (

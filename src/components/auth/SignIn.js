@@ -10,7 +10,11 @@ import { initQuestions } from "../../actions/question";
 // firebase - auth
 import app, { auth } from "../../firebase";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  browserSessionPersistence,
+  setPersistence,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 // helper functions
 import { isValidEmail, isValidPassword } from "./validation";
@@ -207,7 +211,8 @@ const SignIn = () => {
     e.preventDefault();
     const { email, password } = signInState;
 
-    await signInWithEmailAndPassword(auth, email, password)
+    await setPersistence(auth, browserSessionPersistence)
+      .then(() => signInWithEmailAndPassword(auth, email, password))
       .then((userCredential) => {
         // 로그인에 성공하면 질문들을 fetch하고 메인 페이지로 넘어감
         fetchQuestions();
