@@ -32,7 +32,7 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <BrowserRouter basename={process.env.REACT_APP_PUBLIC_URL}>
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/signin" element={<SignIn />} />
