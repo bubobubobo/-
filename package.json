@@ -1,6 +1,7 @@
 {
   "name": "showme",
   "version": "0.1.0",
+  "homepage": "http://bubobubobo.github.io/ShowMe",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
@@ -26,6 +27,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "upload": "node ./uploadDB/uploader.js",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
@@ -46,7 +48,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://bubobubobo.github.io/ShowMe",
   "devDependencies": {
     "gh-pages": "^4.0.0"
   }
