@@ -25,7 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "upload": "node ./uploadDB/uploader.js"
+    "upload": "node ./uploadDB/uploader.js",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -44,5 +45,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "homepage": "http://bubobubobo.github.io/ShowMe",
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }

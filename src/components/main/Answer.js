@@ -20,9 +20,14 @@ const StyledWrapper = styled.div`
 
 const StyledAnswer = styled.p`
   display: block;
+  font-size: 1.3rem;
   font-weight: 600;
   color: ${(props) => props.theme.font_white};
   text-align: center;
+
+  @media screen and (max-width: ${(props) => props.theme.tablet}) {
+    font-size: 1rem;
+  }
 `;
 //////////////////////////////////////////////////////////////////////
 

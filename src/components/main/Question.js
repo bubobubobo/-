@@ -21,9 +21,14 @@ const QuestionWrapper = styled.div`
 
 const StyledQuestion = styled.p`
   display: block;
+  font-size: 1.5rem;
   font-weight: 600;
   color: ${(props) => props.theme.font_white};
   text-align: center;
+
+  @media screen and (max-width: ${(props) => props.theme.tablet}) {
+    font-size: 1rem;
+  }
 `;
 
 const ShowAnswer = styled.button`
@@ -32,7 +37,7 @@ const ShowAnswer = styled.button`
   right: 0;
   border: initial;
   background: transparent;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   font-weight: 800;
   color: ${(props) => props.theme.font_white};
   transform: translate3d(0, -100%, 0);

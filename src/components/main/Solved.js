@@ -7,6 +7,7 @@ import styled, { keyframes } from "styled-components";
 
 //////////////////////////////////////////////////////////////////////
 // styles
+// bounce hover effect : https://codepen.io/halink0803/pen/qdVXqm
 const bounce = keyframes`
   0%, 100%, 20%, 50%, 80% {
     -webkit-transform: translateY(0);

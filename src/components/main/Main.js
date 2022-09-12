@@ -1,5 +1,6 @@
 // components
 import Header from "./Header";
+import Contact from "./Contact";
 import HitMe from "./HitMe";
 import StopWatch from "./StopWatch";
 import Question from "./Question";
@@ -35,6 +36,7 @@ const Main = () => {
   return (
     <StyledMain>
       <Header />
+      <Contact />
       <HitMe setIsOpened={setIsOpened} />
       {!isSigned ? null : (
         <>
