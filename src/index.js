@@ -8,7 +8,9 @@ import { ThemeProvider } from "styled-components";
 import { theme, mixins } from "./style/theme";
 
 // how to deploy
-// https://github.com/gitname/react-gh-pages
+// firebase auth
+// how to use gh-pages: https://github.com/gitname/react-gh-pages
+// basename 설정: https://nomadcoders.co/community/thread/5722
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

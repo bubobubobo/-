@@ -29,7 +29,7 @@ const shake = keyframes`
 const StyledHitMe = styled.button`
   margin-top: 3.75rem;
   margin-bottom: 1.875rem;
-  font-size: 3rem;
+  font-size: 6rem;
   font-weight: 700;
   color: ${(props) => props.theme.font_white};
   text-shadow: 4px 4px 4px gray;
@@ -39,6 +39,10 @@ const StyledHitMe = styled.button`
     animation: ${shake} 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
     transform: translate3d(0, 0, 0);
     perspective: 1000px;
+  }
+
+  @media screen and (max-width: ${(props) => props.theme.tablet}) {
+    font-size: 3rem;
   }
 `;
 //////////////////////////////////////////////////////////////////////
