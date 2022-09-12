@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "http://bubobubobo.github.io/ShowMe/static/js/main.23258095.js",
-    "index.html": "http://bubobubobo.github.io/ShowMe/index.html",
-    "main.23258095.js.map": "http://bubobubobo.github.io/ShowMe/static/js/main.23258095.js.map"
+    "main.js": "https://bubobubobo.github.io/ShowMe/static/js/main.e29e0b6b.js",
+    "index.html": "https://bubobubobo.github.io/ShowMe/index.html",
+    "main.e29e0b6b.js.map": "https://bubobubobo.github.io/ShowMe/static/js/main.e29e0b6b.js.map"
   },
   "entrypoints": [
-    "static/js/main.23258095.js"
+    "static/js/main.e29e0b6b.js"
   ]
 }
