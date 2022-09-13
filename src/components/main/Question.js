@@ -8,11 +8,10 @@ import styled from "styled-components";
 const QuestionWrapper = styled.div`
   display: block;
   width: 80%;
-  min-height: 7.5rem;
   position: relative;
   ${(props) => props.theme.flexBox("column", "center", "center")}
   border-radius: 10px;
-  padding: 0.5rem;
+  padding: 1rem;
   margin-top: 1.875rem;
   margin-bottom: 1.2rem;
   background: ${(props) => props.theme.bg_box};

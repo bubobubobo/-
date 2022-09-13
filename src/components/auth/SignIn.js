@@ -133,7 +133,7 @@ const ToSignUpLink = {
 
 // firestore db
 const db = getFirestore(app);
-const ref = collection(db, "JS");
+const ref = collection(db, "FrontEnd");
 
 const SignIn = () => {
   // navigator
@@ -168,6 +168,7 @@ const SignIn = () => {
       id: doc.id,
       ...doc.data(),
     }));
+    console.log(questions);
     dispatch(initQuestions(questions));
   };
 

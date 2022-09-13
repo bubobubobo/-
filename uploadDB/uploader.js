@@ -47,11 +47,11 @@ fs.readdir(dirPath, (err, files) => {
     // 2. initialize collection
     data.forEach(async (q) => {
       try {
-        const { question, answer } = q;
+        const { question, answer, link } = q;
         await firestore
           .collection(collectionName)
           .doc()
-          .set({ question, answer });
+          .set({ question, answer, link });
       } catch (err) {
         console.error("Cannnot upload question: " + err);
       }

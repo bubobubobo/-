@@ -145,7 +145,7 @@ const ToSignInLink = {
 
 // firestore db
 const db = getFirestore(app);
-const ref = collection(db, "JS");
+const ref = collection(db, "FrontEnd");
 
 const SignUp = () => {
   // navigator
