@@ -25,7 +25,7 @@ const SignInForm = styled.form`
 `;
 
 const GoHomeLink = {
-  display: "block",
+  display: "inline-block",
   padding: "0.75rem",
   fontSize: "1.4rem",
   fontWeight: "900",
