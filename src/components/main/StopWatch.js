@@ -86,19 +86,17 @@ const StopWatch = () => {
    *    return문 안에 작성할 것!
    */
   useEffect(() => {
-    // TODO: isRunning인 경우에 setTimeInterval로 time update, 아닌 경우 clearTimeInterval
-    // TODO: https://sgwanlee.medium.com/useeffect%EC%9D%98-dependency-array-ebd15f35403a
+    // isRunning인 경우에 setTimeInterval로 time update, 아닌 경우 clearTimeInterval
+    // https://sgwanlee.medium.com/useeffect%EC%9D%98-dependency-array-ebd15f35403a
     let timerId = null;
 
     if (isRunning) {
       timerId = setInterval(() => {
         setTime((prevTime) => prevTime + 10);
       }, 10);
-      // console.log("timer" + timerId + "is started!");
     }
 
     return () => {
-      // console.log("timer" + timerId + "is unmounted!");
       clearInterval(timerId);
     };
   }, [isRunning]);

@@ -6,9 +6,19 @@
       "link": "https://velog.io/@bubobubobo/%ED%98%B8%EC%9D%B4%EC%8A%A4%ED%8C%85"
     },
     {
-      "question": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget mollis diam. Nulla vel elit et dui lobortis gravida ac non mauris. Integer quis magna dictum, luctus tellus sed, blandit tellus. Nullam felis est, cursus vel aliquam sit amet, finibus a leo. Quisque luctus, ipsum vitae aliquet semper, tortor mi finibus nibh, id ullamcorper enim diam et mi. In non dui a eros ornare tempus nec sit amet magna. Proin et sem eu mauris ultricies blandit sed eget felis. Donec vel elementum arcu, suscipit tempor augue.",
-      "answer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget mollis diam. Nulla vel elit et dui lobortis gravida ac non mauris. Integer quis magna dictum, luctus tellus sed, blandit tellus. Nullam felis est, cursus vel aliquam sit amet, finibus a leo. Quisque luctus, ipsum vitae aliquet semper, tortor mi finibus nibh, id ullamcorper enim diam et mi. In non dui a eros ornare tempus nec sit amet magna. Proin et sem eu mauris ultricies blandit sed eget felis. Donec vel elementum arcu, suscipit tempor augue.",
-      "link": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget mollis diam. Nulla vel elit et dui lobortis gravida ac non mauris. Integer quis magna dictum, luctus tellus sed, blandit tellus. Nullam felis est, cursus vel aliquam sit amet, finibus a leo. Quisque luctus, ipsum vitae aliquet semper, tortor mi finibus nibh, id ullamcorper enim diam et mi. In non dui a eros ornare tempus nec sit amet magna. Proin et sem eu mauris ultricies blandit sed eget felis. Donec vel elementum arcu, suscipit tempor augue."
+      "question": "검색창에 \"naver.com\"을 입력하고 엔터를 누르면 어떤 과정을 거쳐 브라우저에 네이버 페이지가 보이는지 순서대로 설명해주세요.",
+      "answer": "To be added",
+      "link": "To be added"
+    },
+    {
+      "question": "클로저란 무엇인가요? 왜 쓰는건가요?",
+      "answer": "To be added",
+      "link": "To be added"
+    },
+    {
+      "question": "웹 표준에 대해 말씀해주세요.",
+      "answer": "To be added",
+      "link": "To be added"
     }
   ]
 }
